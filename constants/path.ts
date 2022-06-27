@@ -1,6 +1,6 @@
 enum Path {
-  LANDING = "/",
-  HOME = "/home",
+  HOME = "/",
+  USER = "/user",
 }
 
 export default Path;

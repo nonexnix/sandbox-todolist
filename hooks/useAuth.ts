@@ -8,9 +8,9 @@ const useAuth = () => {
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    const isPathLanding = router.pathname === Path.LANDING;
-    if (!isPathLanding && status === "unauthenticated") {
-      router.push(Path.LANDING);
+    const isPathHome = router.pathname === Path.HOME;
+    if (!isPathHome && status === "unauthenticated") {
+      router.push(Path.HOME);
     }
   }, [session]);
 
