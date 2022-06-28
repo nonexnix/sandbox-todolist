@@ -8,7 +8,7 @@ interface Props {
   fallback: any;
 }
 
-const UserPage: NextPage<Props> = ({ fallback }) => {
+const HomePage: NextPage<Props> = ({ fallback }) => {
   return (
     <AuthProvider>
       <SWRProvider fallback={fallback}>
@@ -18,7 +18,7 @@ const UserPage: NextPage<Props> = ({ fallback }) => {
   );
 };
 
-export default UserPage;
+export default HomePage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const users = await prismaClient.user.findMany();
