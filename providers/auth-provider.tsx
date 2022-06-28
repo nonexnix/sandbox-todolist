@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import React from "react";
 import Route from "../constants/route";
 import useAuth from "../hooks/use-auth";
 
@@ -18,7 +19,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
   if (!session && router.pathname !== Route.BASE) return <>Loading...</>;
 
   // If the session is available and the user is logged in then render
-  return <div>{children}</div>;
+  return <React.Fragment>{children}</React.Fragment>;
 };
 
 export default AuthProvider;
