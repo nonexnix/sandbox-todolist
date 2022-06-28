@@ -1,10 +1,9 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { Prisma } from "@prisma/client";
+import { NextApiHandler } from "next";
 import { getSession } from "next-auth/react";
 import prismaClient from "../../../../adapters/prisma/prisma-client";
 
-type Handler = (request: NextApiRequest, response: NextApiResponse) => {};
-
-const handler: Handler = async (request, response) => {
+const handler: NextApiHandler = async (request, response) => {
   const session = await getSession({ req: request });
 
   if (!session) {
@@ -12,11 +11,22 @@ const handler: Handler = async (request, response) => {
   }
 
   try {
+    const userId = String(request.query.userId);
     switch (request.method) {
       case "GET": {
-        const userId = String(request.query.userId);
         const user = await prismaClient.user.findUnique({
           where: { id: userId },
+        });
+        return response.send(user);
+      }
+      case "PUT": {
+        const body: Prisma.UserUpdateInput = JSON.parse(request.body);
+        const user = await prismaClient.user.update({
+          where: { id: userId },
+          data: {
+            firstName: body.firstName,
+            lastName: body.lastName,
+          },
         });
         return response.send(user);
       }
