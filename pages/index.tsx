@@ -15,13 +15,13 @@ const LandingPage: NextPage<Props> = ({ user }) => {
   return (
     <div>
       <section>
-        {session ? (
+        {!session ? (
+          <button onClick={() => signIn("github")}>Sign in</button>
+        ) : (
           <div>
             <button onClick={() => signOut()}>Sign out</button>
             <Link href={`/user/${user.id}`}>Home</Link>
           </div>
-        ) : (
-          <button onClick={() => signIn("github")}>Sign in</button>
         )}
       </section>
     </div>
