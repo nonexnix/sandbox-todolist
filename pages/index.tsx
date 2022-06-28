@@ -9,7 +9,7 @@ interface Props {
   user: User;
 }
 
-const LandingPage: NextPage<Props> = ({ user }) => {
+const BasePage: NextPage<Props> = ({ user }) => {
   const { session, signOut, signIn } = useAuth();
 
   return (
@@ -20,15 +20,15 @@ const LandingPage: NextPage<Props> = ({ user }) => {
         ) : (
           <div>
             <button onClick={() => signOut()}>Sign out</button>
-            <Link href={`/user/${user.id}`}>Home</Link>
-          </div>
+            <Link href={`/user/${user.id}/home`}>Home</Link>
+          </div>  
         )}
       </section>
     </div>
   );
 };
 
-export default LandingPage;
+export default BasePage;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
