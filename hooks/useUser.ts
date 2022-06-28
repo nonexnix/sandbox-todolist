@@ -6,12 +6,26 @@ const useUser = () => {
   const router = useRouter();
   const userId = String(router.query.userId);
   const key = `/api/users/${userId}`;
-  const { data, mutate } = useSWR<User>(key);
+  const { data, mutate } = useSWR(key);
   const user = data as User;
 
   return {
     user,
-    mutate,
+    mutate: {
+      update: {
+        user: async (payload: User) => {
+          mutate(payload);
+          await fetch(key, {
+            method: "PUT",
+            headers: {
+              contentType: "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+          mutate();
+        },
+      },
+    },
   };
 };
 
