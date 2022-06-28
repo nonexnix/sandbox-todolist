@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
+import AuthProvider from "../providers/auth-provider";
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -10,7 +11,9 @@ const App = ({ Component, pageProps }: AppProps) => {
         <title>Sandbox Todolist</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </SessionProvider>
   );
 };

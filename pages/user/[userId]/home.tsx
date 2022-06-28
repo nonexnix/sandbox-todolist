@@ -10,11 +10,9 @@ interface Props {
 
 const HomePage: NextPage<Props> = ({ fallback }) => {
   return (
-    <AuthProvider>
-      <SWRProvider fallback={fallback}>
-        <section>Hello World!</section>
-      </SWRProvider>
-    </AuthProvider>
+    <SWRProvider fallback={fallback}>
+      <section>Hello World!</section>
+    </SWRProvider>
   );
 };
 
@@ -49,5 +47,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         [`/api/users/${userId}/todos`]: serializer(todos),
       },
     },
+    revalidate: 10,
   };
 };

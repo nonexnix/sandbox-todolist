@@ -1,4 +1,5 @@
-import AuthLoader from "../components/auth-loader";
+import { useRouter } from "next/router";
+import Route from "../constants/route";
 import useAuth from "../hooks/use-auth";
 
 interface Props {
@@ -8,12 +9,13 @@ interface Props {
 const AuthProvider: React.FC<Props> = ({ children }) => {
   // If the session is not available and the user is not logged in, then redirect
   const { session, status } = useAuth();
+  const router = useRouter();
 
-  console.log(`AuthProvider: ${status}`);
+  console.log(`AuthProvider: ${status} | ${router.pathname}`);
 
   // If the session is not available and the user is logged in, then show loader and render
   // Or  when the user tries to access restricted url and not logged in, then show loader and redirect
-  if (!session) return <AuthLoader />;
+  if (!session && router.pathname !== Route.BASE) return <>Loading...</>;
 
   // If the session is available and the user is logged in then render
   return <div>{children}</div>;
