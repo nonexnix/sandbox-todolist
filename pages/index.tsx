@@ -3,7 +3,7 @@ import type { GetServerSideProps, NextPage } from "next";
 import { getSession } from "next-auth/react";
 import Link from "next/link";
 import prismaClient from "../adapters/prisma/prisma-client";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../hooks/use-auth";
 
 interface Props {
   user: User;

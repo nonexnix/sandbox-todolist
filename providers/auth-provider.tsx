@@ -1,5 +1,5 @@
 import AuthLoader from "../components/auth-loader";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../hooks/use-auth";
 
 interface Props {
   children: React.ReactNode;
