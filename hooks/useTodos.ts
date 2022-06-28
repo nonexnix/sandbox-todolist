@@ -43,9 +43,9 @@ const useTodos = () => {
           },
         },
         delete: {
-          todo: async (payload: { todoId: string }) => {
-            mutate(todos.filter((todo) => todo.id === payload.todoId));
-            await fetch(`${key}/${payload.todoId}`, {
+          todo: async (payload: Todo) => {
+            mutate(todos.filter((todo) => todo.id === payload.id));
+            await fetch(`${key}/${payload.id}`, {
               method: "DELETE",
               headers: {
                 contentType: "application/json",
