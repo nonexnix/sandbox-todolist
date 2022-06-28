@@ -8,8 +8,8 @@ const useAuth = () => {
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    const isAtBaseUrl = router.pathname === Route.BASE;
-    if (!isAtBaseUrl && status === "unauthenticated") {
+    const isAtRestrictedRoute = router.pathname !== Route.BASE;
+    if (isAtRestrictedRoute && status === "unauthenticated") {
       router.push(Route.BASE);
     }
   }, [session]);
