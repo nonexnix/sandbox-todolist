@@ -51,14 +51,17 @@ model User {
   accounts      Account[]
   sessions      Session[]
   todos         Todo[]
+  // Custom fields
+  firstName     String?
+  lastName      String?
 }
 
 model Todo {
   id          String   @id @default(cuid())
   text        String
   isCompleted Boolean  @default(false)
-  createdAt   DateTime
-  updatedAt   DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   order       Int
   user        User     @relation(fields: [userId], references: [id])
   userId      String
