@@ -3,7 +3,6 @@ import type { GetServerSideProps, NextPage } from "next";
 import { getSession } from "next-auth/react";
 import Link from "next/link";
 import prismaClient from "../adapters/prisma/prisma-client";
-import Path from "../constants/path";
 import useAuth from "../hooks/useAuth";
 
 interface Props {
@@ -20,7 +19,7 @@ const LandingPage: NextPage<Props> = ({ user }) => {
         {session ? (
           <div>
             <button onClick={() => signOut()}>Sign out</button>
-            <Link href={`${Path.USER}/${user.id}`}>Home</Link>
+            <Link href={`/user/${user.id}`}>Home</Link>
           </div>
         ) : (
           <button onClick={() => signIn("github")}>Sign in</button>
