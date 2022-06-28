@@ -2,7 +2,6 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import prismaClient from "../../../adapters/prisma/prisma-client";
 import serializer from "../../../utilities/serializer";
 import SWRProvider from "../../../providers/swr-provider";
-import AuthProvider from "../../../providers/auth-provider";
 
 interface Props {
   fallback: any;

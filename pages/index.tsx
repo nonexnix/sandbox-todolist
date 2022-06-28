@@ -22,7 +22,12 @@ const BasePage: NextPage<Props> = ({ user }) => {
               <div className="flex items-center gap-4 truncate">
                 <span>{user.email}</span>
                 <div className="relative h-8 w-8 overflow-hidden rounded-full">
-                  <Image src={user.image!} layout="fill" objectFit="cover" />
+                  <Image
+                    src={user.image!}
+                    layout="fill"
+                    objectFit="cover"
+                    priority
+                  />
                 </div>
               </div>
             )}
