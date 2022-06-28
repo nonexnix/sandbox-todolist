@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { NextApiHandler } from "next";
 import { getSession } from "next-auth/react";
-import prismaClient from "../../../../adapters/prisma/prisma-client";
+import prisma from "../../../../adapters/prisma";
 
 const handler: NextApiHandler = async (request, response) => {
   const session = await getSession({ req: request });
@@ -14,14 +14,14 @@ const handler: NextApiHandler = async (request, response) => {
     const userId = String(request.query.userId);
     switch (request.method) {
       case "GET": {
-        const user = await prismaClient.user.findUnique({
+        const user = await prisma.user.findUnique({
           where: { id: userId },
         });
         return response.send(user);
       }
       case "PUT": {
         const body: Prisma.UserUpdateInput = JSON.parse(request.body);
-        const user = await prismaClient.user.update({
+        const user = await prisma.user.update({
           where: { id: userId },
           data: {
             firstName: body.firstName,

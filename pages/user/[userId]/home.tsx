@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import prismaClient from "../../../adapters/prisma/prisma-client";
+import prisma from "../../../adapters/prisma";
 import serializer from "../../../utilities/serializer";
 import SWRProvider from "../../../providers/swr-provider";
 
@@ -18,7 +18,7 @@ const HomePage: NextPage<Props> = ({ fallback }) => {
 export default HomePage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const users = await prismaClient.user.findMany();
+  const users = await prisma.user.findMany();
 
   const paths = users.map((user) => ({ params: { userId: user.id } }));
 
@@ -31,11 +31,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const userId = String(params!.userId);
 
-  const user = await prismaClient.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: { id: userId },
   });
 
-  const todos = await prismaClient.todo.findMany({
+  const todos = await prisma.todo.findMany({
     where: { userId },
   });
 

@@ -3,7 +3,7 @@ import type { GetServerSideProps, NextPage } from "next";
 import { getSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import prismaClient from "../adapters/prisma/prisma-client";
+import prisma from "../adapters/prisma";
 import useAuth from "../hooks/use-auth";
 
 interface Props {
@@ -77,7 +77,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const userEmail = String(session.user!.email);
 
-  const user = await prismaClient.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: { email: userEmail },
   });
 

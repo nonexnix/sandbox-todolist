@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { NextApiHandler } from "next";
 import { getSession } from "next-auth/react";
-import prismaClient from "../../../../../../adapters/prisma/prisma-client";
+import prisma from "../../../../../../adapters/prisma";
 
 const handler: NextApiHandler = async (request, response) => {
   const session = await getSession({ req: request });
@@ -15,7 +15,7 @@ const handler: NextApiHandler = async (request, response) => {
     switch (request.method) {
       case "PUT": {
         const body: Prisma.TodoUpdateInput = JSON.parse(request.body);
-        const todo = await prismaClient.todo.update({
+        const todo = await prisma.todo.update({
           where: { id: todoId },
           data: {
             text: body.text,
@@ -26,7 +26,7 @@ const handler: NextApiHandler = async (request, response) => {
         return response.send(todo);
       }
       case "DELETE": {
-        const todo = await prismaClient.todo.delete({
+        const todo = await prisma.todo.delete({
           where: { id: todoId },
         });
         return response.send(todo);
