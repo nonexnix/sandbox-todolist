@@ -14,7 +14,6 @@ const LandingPage: NextPage<Props> = ({ user }) => {
 
   return (
     <div>
-      1
       <section>
         {session ? (
           <div>
