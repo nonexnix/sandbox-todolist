@@ -1,16 +1,16 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import Path from "../constants/path";
+import Route from "../constants/route";
 
 const useAuth = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    const isAtBaseUrl = router.pathname === Path.BASE;
+    const isAtBaseUrl = router.pathname === Route.BASE;
     if (!isAtBaseUrl && status === "unauthenticated") {
-      router.push(Path.BASE);
+      router.push(Route.BASE);
     }
   }, [session]);
 
