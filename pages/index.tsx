@@ -21,7 +21,7 @@ const BasePage: NextPage<Props> = ({ user }) => {
           <div>
             <button onClick={() => signOut()}>Sign out</button>
             <Link href={`/user/${user.id}/home`}>Home</Link>
-          </div>  
+          </div>
         )}
       </section>
     </div>
